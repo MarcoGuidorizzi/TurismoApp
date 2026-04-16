@@ -1,149 +1,170 @@
-# TurismoApp
+# 🗺️ TurismoApp
 
-Aplicação ASP.NET Core MVC para cadastro e listagem de Pontos Turísticos, usando Entity Framework Core e SQL Server.
+Sistema de gerenciamento de **Pontos Turísticos** com operações completas de cadastro, consulta, edição e remoção de informações.
 
-## Pré‑Requisitos
+> 🎥 Demonstração em vídeo em breve.
 
-- .NET SDK
-  - Recomendado: `8.0`
-  - O projeto está em `net10.0`. Se você não tiver .NET 10 instalado, altere para `net8.0` no `TurismoApp.csproj`.
-  - Download: https://dotnet.microsoft.com/download
-- Visual Studio Community 2022
-  - Workload “ASP.NET and web development”
-  - Download: https://visualstudio.microsoft.com/pt-br/vs/community/
-- SQL Server
-  - SQL Server Express 2019/2022 ou `(localdb)\MSSQLLocalDB`
-  - Download: https://www.microsoft.com/pt-br/sql-server/sql-server-downloads
-- SSMS (opcional)
-  - Download: https://aka.ms/ssmsfullsetup
+---
 
-## Configuração de Banco
+## 🛠️ Tecnologias Utilizadas
 
-- Arquivo: `appsettings.json`
-- Chave: `ConnectionStrings:DefaultConnection`
+**Backend**
 
-Exemplos de `Server`:
+![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)
+![ASP.NET Core](https://img.shields.io/badge/ASP.NET_Core-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
+![Entity Framework Core](https://img.shields.io/badge/Entity_Framework_Core-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
+![SQL Server](https://img.shields.io/badge/SQL_Server-CC2927?style=for-the-badge&logo=microsoft-sql-server&logoColor=white)
 
-- Instância SQL Express padrão: `Server=.\SQLEXPRESS;`
-- LocalDB (VS): `Server=(localdb)\MSSQLLocalDB;`
-- Instância nomeada: `Server=DESKTOP123\SQL2019;`
-- Remoto com porta: `Server=localhost,1433; User Id=sa; Password=SuaSenhaSegura;`
+**Frontend**
 
-Exemplo base (Windows Auth):
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
-```json
-"DefaultConnection": "Server=.\SQLEXPRESS;Database=TurismoDB;Trusted_Connection=True;TrustServerCertificate=True;"
+---
+
+## 🏗️ Arquitetura
+
+O projeto foi desenvolvido utilizando o padrão **MVC (Model-View-Controller)**, separando as responsabilidades da aplicação em três camadas distintas.
+
+```
+Model → View → Controller
 ```
 
-Dicas:
+| Camada | Responsabilidade |
+|---|---|
+| **Model** | Define as entidades e regras de negócio da aplicação |
+| **View** | Responsável pela interface visual apresentada ao usuário |
+| **Controller** | Processa as requisições e coordena Model e View |
 
-- Para usuário/senha, use: `Server=...;Database=TurismoDB;User Id=sa;Password=SuaSenha;TrustServerCertificate=True;`
-- `TrustServerCertificate=True` evita problemas de certificado local.
+---
 
-## Como Rodar (CLI)
+## 📁 Estrutura do Projeto
+
+```
+TurismoApp/
+├── Controllers/
+├── Models/
+├── Views/
+│   └── PontosTuristicos/
+│       ├── Index.cshtml
+│       └── Create.cshtml
+├── wwwroot/
+│   └── images/
+│       └── logo.jpg
+├── appsettings.json
+└── TurismoApp.sln
+```
+
+---
+
+## ✅ Funcionalidades
+
+- 📋 Listagem de todos os pontos turísticos
+- ➕ Cadastro de novo ponto turístico
+- 🔍 Consulta de ponto turístico por ID
+- ✏️ Edição de informações de um ponto turístico
+- 🗑️ Remoção de ponto turístico
+
+---
+
+## ⚙️ Pré-requisitos
+
+Antes de rodar o projeto, certifique-se de ter instalado:
+
+- [.NET 10 SDK](https://dotnet.microsoft.com/download) — se não tiver .NET 10, altere o `TargetFramework` para `net8.0` no `TurismoApp.csproj`
+- [Visual Studio Community 2022](https://visualstudio.microsoft.com/pt-br/vs/community/) com workload **"ASP.NET and web development"**
+- [SQL Server](https://www.microsoft.com/pt-br/sql-server/sql-server-downloads) — SQL Server Express 2019/2022 ou `(localdb)\MSSQLLocalDB`
+- [SSMS](https://aka.ms/ssmsfullsetup) *(opcional, para gerenciar o banco)*
+
+---
+
+## 🔧 Configuração do Banco de Dados
+
+Edite o arquivo `appsettings.json` e ajuste a chave `ConnectionStrings:DefaultConnection` com o seu servidor:
 
 ```json
-cd "C:\SEU\CAMINHO\PARA\TurismoApp"
+"ConnectionStrings": {
+  "DefaultConnection": "Server=.\\SQLEXPRESS;Database=TurismoDB;Trusted_Connection=True;TrustServerCertificate=True;"
+}
+```
+
+Exemplos de `Server` conforme seu ambiente:
+
+| Ambiente | Exemplo |
+|---|---|
+| SQL Express padrão | `Server=.\SQLEXPRESS;` |
+| LocalDB (Visual Studio) | `Server=(localdb)\MSSQLLocalDB;` |
+| Instância nomeada | `Server=DESKTOP123\SQL2019;` |
+| Remoto com porta | `Server=localhost,1433;` |
+| Com usuário e senha | `User Id=sa;Password=SuaSenha;TrustServerCertificate=True;` |
+
+> ✅ O banco de dados é criado automaticamente na primeira execução via `EnsureCreated`.
+
+---
+
+## 🚀 Como Rodar o Projeto
+
+### Via CLI
+
+1. Clone o repositório:
+```bash
+git clone https://github.com/MarcoGuidorizzi/TurismoApp.git
+```
+
+2. Acesse a pasta do projeto:
+```bash
+cd TurismoApp
+```
+
+3. Restaure as dependências e execute:
+```bash
 dotnet restore
 dotnet build
 dotnet run
 ```
 
-- Endpoints: `https://localhost:7160/` e `http://localhost:5085/` (conforme `launchSettings.json`)
-- Rotas principais:
-  - `PontosTuristicos/Index`
-  - `PontosTuristicos/Create`
-- O banco é criado automaticamente na primeira execução (`EnsureCreated`).
+4. Acesse no navegador:
+- `https://localhost:7160/`
+- `http://localhost:5085/`
 
-## Como Rodar (Visual Studio Community)
-
-- Abra `TurismoApp.sln`
-- Defina `TurismoApp` como projeto de inicialização
-- Ajuste `appsettings.json` com seu `Server`
-- `F5` (Debug) ou `Ctrl+F5` (Start Without Debugging)
-- Acesse `PontosTuristicos/Create` para cadastrar
-
-## Assets (Logo)
-
-- Coloque sua imagem em `wwwroot\images\logo.jpg`
-- As views utilizam `~/images/logo.jpg`. Se for `.png`, ajuste o nome na view.
-
-## Troubleshooting
-
-- Falha de conexão:
-  - Verifique `Server`, `Database`, `Trusted_Connection` vs `User Id`/`Password`
-  - Teste a conexão via SSMS
-- SDK não encontrado:
-  - Ajuste `TargetFramework` para `net8.0` em `TurismoApp.csproj` se não tiver .NET 10.
-- Estático não carrega:
-  - O projeto usa `app.UseStaticFiles()`. Coloque arquivos sob `wwwroot`.
+Rotas principais:
+- `PontosTuristicos/Index` — listagem
+- `PontosTuristicos/Create` — cadastro
 
 ---
 
-## Segunda Etapa do Teste — SQL (SQL Server)
+### Via Visual Studio Community
 
-Tabela: `PontosTuristicos (Id, Nome, Cidade, Estado, Descricao, DataInclusao)`
-
-1. SELECT com `EXISTS` — nomes da cidade “TUPA”
-
-```sql
-SELECT Nome FROM PontosTuristicos WHERE Cidade = 'TUPA'
-```
-
-2. SELECT — nome do ponto e nome da cidade de todos os pontos turísticos
-
-```sql
-SELECT Nome, Cidade FROM PontosTuristicos
-```
-
-3. SELECT — todos nomes e códigos, ordenados por nome
-
-```sql
-SELECT Nome, Id FROM PontosTuristicos ORDER BY Nome
-```
-
-4. DELETE — excluir registros com Id entre 100 e 200
-
-```sql
-DELETE FROM PontosTuristicos WHERE Id BETWEEN 100 AND 200
-```
-
-5. UPDATE — alterar estado “PR” para “SP” em todos os registros
-
-```sql
-UPDATE PontosTuristicos SET Estado = 'SP' WHERE Estado = 'PR'
-```
-
-6. INSERT — registro exemplo
-
-```sql
-INSERT INTO PontosTuristicos (Nome, Cidade, Estado, Descricao, DataInclusao)
-VALUES ('Ponto A', 'TUPA', 'PR', 'Descrição do Ponto A', GETDATE())
-```
+1. Abra o arquivo `TurismoApp.sln`
+2. Defina `TurismoApp` como projeto de inicialização
+3. Ajuste o `appsettings.json` com seu `Server`
+4. Pressione `F5` (Debug) ou `Ctrl+F5` (sem debug)
+5. Acesse `PontosTuristicos/Create` para começar a cadastrar
 
 ---
 
-## Terceira Etapa do Teste — Trocar Pneu Furado
+## 🖼️ Assets
 
-1. Reduzir a velocidade e encostar em local seguro, plano e afastado do fluxo.
-2. Ligar o pisca-alerta.
-3. Puxar o freio de mão.
-4. Engatar o carro (1ª/re ou “P” no automático).
-5. Colocar calços nas rodas opostas ao pneu furado (se houver).
-6. Posicionar o triângulo a distância segura (≈30 m ou conforme a via).
-7. Pegar estepe, macaco e chave de roda.
-8. Retirar a calota, se houver.
-9. Afrouxar levemente os parafusos com o carro no chão.
-10. Posicionar o macaco no ponto correto de apoio.
-11. Levantar o carro até o pneu ficar fora do chão.
-12. Remover totalmente os parafusos.
-13. Retirar a roda furada.
-14. Colocar o estepe alinhando os furos.
-15. Rosquear os parafusos com a mão.
-16. Apertar parcialmente com a chave de roda.
-17. Baixar o carro até o pneu encostar no chão.
-18. Retirar o macaco.
-19. Apertar definitivamente os parafusos.
-20. Guardar roda e ferramentas.
-21. Recolher o triângulo.
-22. Desligar o pisca-alerta e seguir viagem.
+- Coloque sua imagem de logo em `wwwroot/images/logo.jpg`
+- As views utilizam o caminho `~/images/logo.jpg`
+- Se usar `.png`, ajuste o nome nas views correspondentes
+
+---
+
+## 🔍 Troubleshooting
+
+| Problema | Solução |
+|---|---|
+| Falha de conexão com o banco | Verifique `Server`, `Database` e as credenciais no `appsettings.json`. Teste via SSMS. |
+| SDK não encontrado | Altere `TargetFramework` para `net8.0` no `TurismoApp.csproj` |
+| Arquivos estáticos não carregam | O projeto usa `app.UseStaticFiles()`. Certifique-se de que os arquivos estão em `wwwroot` |
+
+---
+
+## 👨‍💻 Autor
+
+Feito por **Marco Guidorizzi**
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/marco-guidorizzi-314282219/)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/MarcoGuidorizzi)
